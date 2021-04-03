@@ -48,7 +48,7 @@ indexzero
 	ldr r2,=Son
 	str r2,[r0]
 	mov r1,r2
-	bl SuiteCallback
+	b SuiteCallback
 	endp
 		
 
