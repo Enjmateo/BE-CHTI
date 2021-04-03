@@ -41,7 +41,7 @@ SuiteCallback
 	add r1,#2
 	str r1,[r0] ;on la stocke dans adresseson
 	ldr r1,[r1] ;on récupère la valeur à la nouvelle adresse
-	str r1,[r3] ;on la mets dans sortie son test
+	str r1,[r3] ;on la mets dans sortie son
 	;ldr SortieSon,[r1]
 	pop {pc}
 indexzero
