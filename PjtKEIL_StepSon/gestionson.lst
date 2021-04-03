@@ -1,0 +1,201 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 PRESERVE8
+    2 00000000                 THUMB
+    3 00000000         
+    4 00000000         
+    5 00000000         ; ====================== zone de réservation de données,
+                         ======================================
+    6 00000000         ;Section RAM (read only) :
+    7 00000000                 area             mesdata,data,readonly
+    8 00000000         
+    9 00000000         
+   10 00000000         ;Section RAM (read write):
+   11 00000000                 area             maram,data,readwrite
+   12 00000000 00000000 
+                       SortieSon
+                               dcd              0
+   13 00000004 00000000 
+                       AdresseSon
+                               dcd              0
+   14 00000008         
+   15 00000008         ; ======================================================
+                       =========================================
+   16 00000008         
+   17 00000008                 extern           Son
+   18 00000008                 export           CallbackSon
+   19 00000008                 export           SortieSon
+   20 00000008                 export           AdresseSon
+   21 00000008         
+   22 00000008         ;Section ROM code (read only) :  
+   23 00000008                 area             moncode,code,readonly
+   24 00000000         ; écrire le code ici  
+   25 00000000         
+   26 00000000         
+   27 00000000         CallbackSon
+                               proc
+   28 00000000 B500            push             {lr}
+   29 00000002 4808            ldr              r0,=AdresseSon ;On stocke l'adr
+                                                            esse de AdresseSon 
+                                                            dans r0
+   30 00000004 4B08            ldr              r3,=SortieSon ;On stocke l'adre
+                                                            sse de Sortie dans 
+                                                            r3
+   31 00000006         
+   32 00000006 6801            ldr              r1,[r0]     ; On récupère la va
+                                                            leur de AdresseSon 
+                                                            dans r1
+   33 00000008 2900            cmp              r1, #0
+   34 0000000A D005            beq              indexzero
+   35 0000000C         ;Si Adresse son != 0 on continue et sinon on branche sur
+                        indexzero
+   36 0000000C         ;dans ce cas là on est au premier appel de CallBackson
+   37 0000000C         
+   38 0000000C         ;Dans le cas ou c'est différent de 0 on continue
+   39 0000000C         SuiteCallback
+   40 0000000C         ;on incrémente la valeur de adresseson de 16bits (2octet
+                       s)
+   41 0000000C F101 0102       add              r1,#2
+   42 00000010 6001            str              r1,[r0]     ;on la stocke dans 
+                                                            adresseson
+   43 00000012 6809            ldr              r1,[r1]     ;on récupère la val
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                                                            eur à la nouvelle a
+                                                            dresse
+   44 00000014 6019            str              r1,[r3]     ;on la mets dans so
+                                                            rtie son
+   45 00000016         ;ldr SortieSon,[r1]
+   46 00000016 BD00            pop              {pc}
+   47 00000018         indexzero
+   48 00000018 4A04            ldr              r2,=Son
+   49 0000001A 6002            str              r2,[r0]
+   50 0000001C 4611            mov              r1,r2
+   51 0000001E F7FF FFF5       bl               SuiteCallback
+   52 00000022                 endp
+   53 00000022         
+   54 00000022         
+   55 00000022         
+   56 00000022         
+   57 00000022                 END
+              00 00 00000000 
+              00000000 
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\obj\gestionson.d -o.\obj\gestionson.o -I.\RTE\_Simu -ID:\Program
+mes\ARM\CMSIS\5.7.0\CMSIS\Core\Include -ID:\Programmes\Keil\STM32F1xx_DFP\2.3.0
+\Device\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" --p
+redefine="__UVISION_VERSION SETA 533" --predefine="_RTE_ SETA 1" --predefine="S
+TM32F10X_MD SETA 1" --predefine="_RTE_ SETA 1" --list=gestionson.lst Src\Gestio
+nSon.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+mesdata 00000000
+
+Symbol: mesdata
+   Definitions
+      At line 7 in file Src\GestionSon.s
+   Uses
+      None
+Comment: mesdata unused
+1 symbol
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+AdresseSon 00000004
+
+Symbol: AdresseSon
+   Definitions
+      At line 13 in file Src\GestionSon.s
+   Uses
+      At line 20 in file Src\GestionSon.s
+      At line 29 in file Src\GestionSon.s
+
+SortieSon 00000000
+
+Symbol: SortieSon
+   Definitions
+      At line 12 in file Src\GestionSon.s
+   Uses
+      At line 19 in file Src\GestionSon.s
+      At line 30 in file Src\GestionSon.s
+
+maram 00000000
+
+Symbol: maram
+   Definitions
+      At line 11 in file Src\GestionSon.s
+   Uses
+      None
+Comment: maram unused
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+CallbackSon 00000000
+
+Symbol: CallbackSon
+   Definitions
+      At line 27 in file Src\GestionSon.s
+   Uses
+      At line 18 in file Src\GestionSon.s
+Comment: CallbackSon used once
+SuiteCallback 0000000C
+
+Symbol: SuiteCallback
+   Definitions
+      At line 39 in file Src\GestionSon.s
+   Uses
+      At line 51 in file Src\GestionSon.s
+Comment: SuiteCallback used once
+indexzero 00000018
+
+Symbol: indexzero
+   Definitions
+      At line 47 in file Src\GestionSon.s
+   Uses
+      At line 34 in file Src\GestionSon.s
+Comment: indexzero used once
+moncode 00000000
+
+Symbol: moncode
+   Definitions
+      At line 23 in file Src\GestionSon.s
+   Uses
+      None
+Comment: moncode unused
+4 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+Son 00000000
+
+Symbol: Son
+   Definitions
+      At line 17 in file Src\GestionSon.s
+   Uses
+      At line 48 in file Src\GestionSon.s
+Comment: Son used once
+1 symbol
+346 symbols in table
