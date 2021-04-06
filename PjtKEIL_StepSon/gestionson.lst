@@ -30,36 +30,36 @@ ARM Macro Assembler    Page 1
    18 00000008                 export           CallbackSon
    19 00000008                 export           SortieSon
    20 00000008                 export           AdresseSon
-   21 00000008         
-   22 00000008         ;Section ROM code (read only) :  
-   23 00000008                 area             moncode,code,readonly
-   24 00000000         ; écrire le code ici  
-   25 00000000         
+   21 00000008                 extern           PWM_Set_Value_TIM3_Ch3
+   22 00000008         
+   23 00000008         ;Section ROM code (read only) :  
+   24 00000008                 area             moncode,code,readonly
+   25 00000000         ; écrire le code ici  
    26 00000000         
-   27 00000000         CallbackSon
+   27 00000000         
+   28 00000000         CallbackSon
                                proc
-   28 00000000 480C            ldr              r0,=AdresseSon ;On stocke l'adr
+   29 00000000 480F            ldr              r0,=AdresseSon ;On stocke l'adr
                                                             esse de AdresseSon 
                                                             dans r0
-   29 00000002 4B0D            ldr              r3,=SortieSon ;On stocke l'adre
+   30 00000002 4B10            ldr              r3,=SortieSon ;On stocke l'adre
                                                             sse de Sortie dans 
                                                             r3
-   30 00000004         
-   31 00000004 6801            ldr              r1,[r0]     ; On récupère la va
+   31 00000004         
+   32 00000004 6801            ldr              r1,[r0]     ; On récupère la va
                                                             leur de AdresseSon 
                                                             dans r1
-   32 00000006 2900            cmp              r1, #0
-   33 00000008 D010            beq              indexzero
-   34 0000000A         ;Si Adresse son != 0 on continue et sinon on branche sur
+   33 00000006 2900            cmp              r1, #0
+   34 00000008 D016            beq              indexzero
+   35 0000000A         ;Si Adresse son != 0 on continue et sinon on branche sur
                         indexzero
-   35 0000000A         ;dans ce cas là on est au premier appel de CallBackson
-   36 0000000A         
+   36 0000000A         ;dans ce cas là on est au premier appel de CallBackson
    37 0000000A         ;Dans le cas ou c'est différent de 0 on continue
-   38 0000000A         SuiteCallback
+   38 0000000A         
    39 0000000A         ;on incrémente la valeur de adresseson de 16bits (2octet
                        s)
-   40 0000000A         
-   41 0000000A F101 0102       add              r1,#2
+   40 0000000A F101 0102       add              r1,#2
+   41 0000000E         SuiteCallback
    42 0000000E 6001            str              r1,[r0]     ;on la stocke dans 
                                                             adresseson
    43 00000010 F9B1 1000       ldrsh            r1,[r1]     ;on récupère la val
@@ -70,8 +70,11 @@ ARM Macro Assembler    Page 2
 
 
                                                             eur à la nouvelle a
-                                                            dresse
-   44 00000014         ;ldr r1,[r0],#2
+                                                            dresse (ldr signé h
+                                                            alf - on prend que 
+                                                            2 octets-)
+   44 00000014         ;On divise par 2^16/720=4096/45 -> on mul par 45 et div 
+                       par 4096 :: NORMALISATION
    45 00000014 F04F 022D       mov              r2, #45
    46 00000018 FB01 F102       mul              r1,r2
    47 0000001C F44F 5280       mov              r2, #4096
@@ -79,20 +82,23 @@ ARM Macro Assembler    Page 2
    49 00000024 F511 71B4       adds             r1, #360
    50 00000028 6019            str              r1,[r3]     ;on la mets dans so
                                                             rtie son
-   51 0000002A         ;ldr SortieSon,[r1]
-   52 0000002A 4770            bx               lr          ;
-   53 0000002C         
-   54 0000002C         indexzero
-   55 0000002C 4A03            ldr              r2,=Son
-   56 0000002E 6002            str              r2,[r0]
-   57 00000030 4611            mov              r1,r2
-   58 00000032 E7EA            b                SuiteCallback
-   59 00000034                 endp
-   60 00000034         
-   61 00000034         
-   62 00000034         
-   63 00000034         
-   64 00000034                 END
+   51 0000002A B500            push             {lr}
+   52 0000002C 4608            mov              r0,r1
+   53 0000002E F7FF FFFE       bl               PWM_Set_Value_TIM3_Ch3
+   54 00000032 F85D EB04       pop              {lr}
+   55 00000036 4770            bx               lr          ;
+   56 00000038         
+   57 00000038         indexzero
+   58 00000038 4A03            ldr              r2,=Son
+   59 0000003A 6002            str              r2,[r0]
+   60 0000003C 4611            mov              r1,r2
+   61 0000003E E7E6            b                SuiteCallback
+   62 00000040                 endp
+   63 00000040         
+   64 00000040         
+   65 00000040         
+   66 00000040         
+   67 00000040                 END
               00000000 
               00000000 
               00000000 
@@ -131,7 +137,7 @@ Symbol: AdresseSon
       At line 13 in file Src\GestionSon.s
    Uses
       At line 20 in file Src\GestionSon.s
-      At line 28 in file Src\GestionSon.s
+      At line 29 in file Src\GestionSon.s
 
 SortieSon 00000000
 
@@ -140,7 +146,7 @@ Symbol: SortieSon
       At line 12 in file Src\GestionSon.s
    Uses
       At line 19 in file Src\GestionSon.s
-      At line 29 in file Src\GestionSon.s
+      At line 30 in file Src\GestionSon.s
 
 maram 00000000
 
@@ -161,31 +167,31 @@ CallbackSon 00000000
 
 Symbol: CallbackSon
    Definitions
-      At line 27 in file Src\GestionSon.s
+      At line 28 in file Src\GestionSon.s
    Uses
       At line 18 in file Src\GestionSon.s
 Comment: CallbackSon used once
-SuiteCallback 0000000A
+SuiteCallback 0000000E
 
 Symbol: SuiteCallback
    Definitions
-      At line 38 in file Src\GestionSon.s
+      At line 41 in file Src\GestionSon.s
    Uses
-      At line 58 in file Src\GestionSon.s
+      At line 61 in file Src\GestionSon.s
 Comment: SuiteCallback used once
-indexzero 0000002C
+indexzero 00000038
 
 Symbol: indexzero
    Definitions
-      At line 54 in file Src\GestionSon.s
+      At line 57 in file Src\GestionSon.s
    Uses
-      At line 33 in file Src\GestionSon.s
+      At line 34 in file Src\GestionSon.s
 Comment: indexzero used once
 moncode 00000000
 
 Symbol: moncode
    Definitions
-      At line 23 in file Src\GestionSon.s
+      At line 24 in file Src\GestionSon.s
    Uses
       None
 Comment: moncode unused
@@ -196,13 +202,21 @@ Comment: moncode unused
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 External symbols
 
+PWM_Set_Value_TIM3_Ch3 00000000
+
+Symbol: PWM_Set_Value_TIM3_Ch3
+   Definitions
+      At line 21 in file Src\GestionSon.s
+   Uses
+      At line 53 in file Src\GestionSon.s
+Comment: PWM_Set_Value_TIM3_Ch3 used once
 Son 00000000
 
 Symbol: Son
    Definitions
       At line 17 in file Src\GestionSon.s
    Uses
-      At line 55 in file Src\GestionSon.s
+      At line 58 in file Src\GestionSon.s
 Comment: Son used once
-1 symbol
-346 symbols in table
+2 symbols
+347 symbols in table
