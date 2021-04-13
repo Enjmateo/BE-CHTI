@@ -19,6 +19,7 @@ AdresseSon dcd 0
 	export SortieSon
 	export AdresseSon
 	extern PWM_Set_Value_TIM3_Ch3
+	extern LongueurSon
 		
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
@@ -29,15 +30,38 @@ CallbackSon proc
 	ldr r0,=AdresseSon ;On stocke l'adresse de AdresseSon dans r0
 	ldr r3,=SortieSon ;On stocke l'adresse de Sortie dans r3
 	
+	ldr r2,=Son ; On stocke l'adresse  du son dans r2
+	
 	ldr r1,[r0] ; On récupère la valeur de AdresseSon dans r1
+	
+	;SI AdresseSon vaut 0, c'est qu'on l'a pas initialisé -> On appele getStartPoint (pour set l'adresse dans notre programme)
 	cmp r1, #0 
-	beq indexzero 
+	beq getStartPoint
+	
+	; SI AdresseSon est égale à l'adresse de fin du son (adresse début du son + 2 * longueur son) -> On appele getStartPoint (pour reset l'adresse dans notre programme)
+	push{r12}
+	ldr r12,=LongueurSon
+	ldr r12, [r12]
+	push{r0}
+	mov r0, #2
+	mul r12, r0
+	pop{r0}
+	add r12, r2
+	cmp r12, r1
+	pop{r12}
+	
+	beq getStartPoint
+	
+	
+
+
 	;Si Adresse son != 0 on continue et sinon on branche sur indexzero
 	;dans ce cas là on est au premier appel de CallBackson
 	;Dans le cas ou c'est différent de 0 on continue
 
 	;on incrémente la valeur de adresseson de 16bits (2octets)
 	add r1,#2
+	
 SuiteCallback
 	str r1,[r0] ;on la stocke dans adresseson
 	ldrsh r1,[r1] ;on récupère la valeur à la nouvelle adresse (ldr signé half - on prend que 2 octets-)
@@ -48,15 +72,16 @@ SuiteCallback
 	sdiv r1, r2
 	adds r1, #360
 	str r1,[r3] ;on la mets dans sortie son
+	
+	;et on set la PWM
 	push {lr}
 	mov r0,r1
 	bl PWM_Set_Value_TIM3_Ch3
 	pop {pc}
 
-indexzero
-	ldr r2,=Son
-	str r2,[r0]
+getStartPoint
 	mov r1,r2
+	str r2,[r0]
 	b SuiteCallback
 	endp
 		
