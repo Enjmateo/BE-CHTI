@@ -20,11 +20,18 @@ AdresseSon dcd 0
 	export AdresseSon
 	extern PWM_Set_Value_TIM3_Ch3
 	extern LongueurSon
+	export StartSon
 		
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
-; écrire le code ici		
+; écrire le code ici	
 
+StartSon proc 
+	ldr r0,=AdresseSon
+	mov r1, #0
+	str r1, [r0]
+	bx lr
+	endp
 
 CallbackSon proc 
 	ldr r0,=AdresseSon ;On stocke l'adresse de AdresseSon dans r0
@@ -38,7 +45,7 @@ CallbackSon proc
 	cmp r1, #0 
 	beq getStartPoint
 	
-	; SI AdresseSon est égale à l'adresse de fin du son (adresse début du son + 2 * longueur son) -> On appele getStartPoint (pour reset l'adresse dans notre programme)
+	; SI AdresseSon est égale à l'adresse de fin du son (adresse début du son + 2 * longueur son) -> On fait rien
 	push{r12}
 	ldr r12,=LongueurSon
 	ldr r12, [r12]
@@ -50,7 +57,7 @@ CallbackSon proc
 	cmp r12, r1
 	pop{r12}
 	
-	beq getStartPoint
+	beq exit
 	
 	
 
@@ -79,10 +86,12 @@ SuiteCallback
 	bl PWM_Set_Value_TIM3_Ch3
 	pop {pc}
 
-getStartPoint
+getStartPoint ; on mets l'adresse du son dans r1 et dans la variable AdresseSon
 	mov r1,r2
 	str r2,[r0]
 	b SuiteCallback
+exit
+	bx lr
 	endp
 		
 

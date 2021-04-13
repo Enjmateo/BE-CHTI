@@ -1,8 +1,7 @@
-
-
+#include <stdio.h>
 #include "DriverJeuLaser.h"
-
 void CallbackSon(void);
+void StartSon(void);
 
 int main(void)
 {
@@ -28,6 +27,9 @@ Active_IT_Debordement_Timer( TIM4, 2, CallbackSon );
 //============================================================================	
 	
 PWM_Init_ff( TIM3, 3, 720);	
+
+for(int i = 0; i<5000000;i++);
+StartSon();
 while	(1)
 	{
 	}
