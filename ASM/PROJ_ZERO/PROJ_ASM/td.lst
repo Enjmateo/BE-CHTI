@@ -1,0 +1,90 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 thumb
+    2 00000000                 area             reset, data, readonly
+    3 00000000                 export           __Vectors
+    4 00000000         __Vectors
+    5 00000000 20004000        dcd              0x20004000  ; stack en fin de l
+                                                            a zone de 20k de RA
+                                                            M
+    6 00000004 00000000        dcd              Reset_Handler ; point d'entree 
+                                                            de notre programme
+    7 00000008         ;
+    8 00000008                 area             moncode, code, readonly
+    9 00000000         ;
+   10 00000000         ; procedure principale
+   11 00000000         ;
+   12 00000000                 export           Reset_Handler
+   13 00000000         Reset_Handler
+                               proc
+   14 00000000         
+   15 00000000 E7FE    boo     b                boo
+   16 00000002                 endp
+   17 00000002         ;
+   18 00000002                 end
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\td.d -o.\td.o -I.\RTE\_Target_1 -IC:\Programdata\Keil\Arm\Packs\
+ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programdata\Keil\Arm\Packs\Keil\STM32F1
+xx_DFP\2.3.0\Device\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_
+VERSION SETA 530" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" 
+--predefine="_RTE_ SETA 1" --list=.\td.lst td.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 4 in file td.s
+   Uses
+      At line 3 in file td.s
+Comment: __Vectors used once
+reset 00000000
+
+Symbol: reset
+   Definitions
+      At line 2 in file td.s
+   Uses
+      None
+Comment: reset unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 13 in file td.s
+   Uses
+      At line 6 in file td.s
+      At line 12 in file td.s
+
+boo 00000000
+
+Symbol: boo
+   Definitions
+      At line 15 in file td.s
+   Uses
+      At line 15 in file td.s
+Comment: boo used once
+moncode 00000000
+
+Symbol: moncode
+   Definitions
+      At line 8 in file td.s
+   Uses
+      None
+Comment: moncode unused
+3 symbols
+339 symbols in table

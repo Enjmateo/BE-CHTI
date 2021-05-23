@@ -1,0 +1,96 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; ce programme est pour l'assembleur RealView (Keil)
+    2 00000000                 thumb
+    3 00000000         
+    4 00000000                 area             madata, data ;, readonly  <-enl
+                                                            evé pcq empèche l'é
+                                                            criture
+    5 00000000                 export           compteur4
+    6 00000000         
+    7 00000000 00000000 
+                       compteur4
+                               dcd              0
+    8 00000004         
+    9 00000004         
+   10 00000004         
+   11 00000004                 area             moncode, code, readonly
+   12 00000000                 export           t4_callback
+   13 00000000         ;
+   14 00000000         t4_callback
+                               proc
+   15 00000000 4902            ldr              r1, =compteur4 ;On load l'adres
+                                                            se de compteur 4 en
+                                                             r1
+   16 00000002 6808            ldr              r0, [r1]    ;On récupère la val
+                                                            eur du compteur en 
+                                                            r0
+   17 00000004 F100 0001       add              r0, #1      ;On incrémente le c
+                                                            ompteur 
+   18 00000008 6008            str              r0, [r1]    ;On mets r0 dans r1
+                                                            
+   19 0000000A 4770            bx               lr          ; dernière instruct
+                                                            ion de la fonction
+   20 0000000C                 endp
+   21 0000000C         ;
+   22 0000000C                 end
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\obj\callback.d -o.\obj\callback.o -I.\RTE\_Simu -IC:\Programdata
+\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programdata\Keil\Arm\Pa
+cks\Keil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__EVAL SETA 1" --prede
+fine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 530" --predefine="
+_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --predefine="_RTE_ SETA 1" --li
+st=callback.lst Src\callback.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+compteur4 00000000
+
+Symbol: compteur4
+   Definitions
+      At line 7 in file Src\callback.s
+   Uses
+      At line 5 in file Src\callback.s
+      At line 15 in file Src\callback.s
+
+madata 00000000
+
+Symbol: madata
+   Definitions
+      At line 4 in file Src\callback.s
+   Uses
+      None
+Comment: madata unused
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+moncode 00000000
+
+Symbol: moncode
+   Definitions
+      At line 11 in file Src\callback.s
+   Uses
+      None
+Comment: moncode unused
+t4_callback 00000000
+
+Symbol: t4_callback
+   Definitions
+      At line 14 in file Src\callback.s
+   Uses
+      At line 12 in file Src\callback.s
+Comment: t4_callback used once
+2 symbols
+341 symbols in table

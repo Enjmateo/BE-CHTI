@@ -407,50 +407,50 @@ Memory Map of the image
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x08000000   0x000000ec   Data   RO           63    RESET               startup-rvds.o
-    0x080000ec   0x080000ec   0x00000000   Code   RO          154  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x080000ec   0x080000ec   0x00000004   Code   RO          181    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x080000f0   0x080000f0   0x00000004   Code   RO          184    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x080000f4   0x080000f4   0x00000000   Code   RO          186    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x080000f4   0x080000f4   0x00000000   Code   RO          188    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x080000f4   0x080000f4   0x00000008   Code   RO          189    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x080000fc   0x080000fc   0x00000004   Code   RO          196    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
-    0x08000100   0x08000100   0x00000000   Code   RO          191    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
-    0x08000100   0x08000100   0x00000000   Code   RO          193    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
-    0x08000100   0x08000100   0x00000004   Code   RO          182    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
-    0x08000104   0x08000104   0x0000004c   Code   RO           64    .text               startup-rvds.o
-    0x08000150   0x08000150   0x00000024   Code   RO          206    .text               mc_w.l(init.o)
-    0x08000174   0x08000174   0x000000e4   Code   RO          119    i.Active_IT_Debordement_Timer  DriverJeuLaser.lib(timer_1234.o)
-    0x08000258   0x08000258   0x00000074   Code   RO           78    i.CLOCK_Configure   DriverJeuLaser.lib(clock.o)
-    0x080002cc   0x080002cc   0x00000008   Code   RO           80    i.CLOCK_GetHCLK     DriverJeuLaser.lib(clock.o)
-    0x080002d4   0x080002d4   0x00000024   Code   RO           83    i.CLOCK_GetTIMCLK   DriverJeuLaser.lib(clock.o)
-    0x080002f8   0x080002f8   0x00000074   Code   RO           84    i.CLOCK_HPRECompute  DriverJeuLaser.lib(clock.o)
-    0x0800036c   0x0800036c   0x00000108   Code   RO          104    i.GPIO_Configure    DriverJeuLaser.lib(gpio.o)
-    0x08000474   0x08000474   0x000000ac   Code   RO          124    i.PWM_Init_ff       DriverJeuLaser.lib(timer_1234.o)
-    0x08000520   0x08000520   0x0000000c   Code   RO          125    i.PWM_Set_Value_TIM3_Ch3  DriverJeuLaser.lib(timer_1234.o)
-    0x0800052c   0x0800052c   0x0000010c   Code   RO          126    i.TIM1_CC_IRQHandler  DriverJeuLaser.lib(timer_1234.o)
-    0x08000638   0x08000638   0x00000018   Code   RO          127    i.TIM1_UP_IRQHandler  DriverJeuLaser.lib(timer_1234.o)
-    0x08000650   0x08000650   0x00000110   Code   RO          128    i.TIM2_IRQHandler   DriverJeuLaser.lib(timer_1234.o)
-    0x08000760   0x08000760   0x0000012c   Code   RO          129    i.TIM3_IRQHandler   DriverJeuLaser.lib(timer_1234.o)
-    0x0800088c   0x0800088c   0x0000012c   Code   RO          130    i.TIM4_IRQHandler   DriverJeuLaser.lib(timer_1234.o)
-    0x080009b8   0x080009b8   0x0000007c   Code   RO          132    i.Timer_1234_Init_ff  DriverJeuLaser.lib(timer_1234.o)
-    0x08000a34   0x08000a34   0x0000000e   Code   RO          212    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08000a42   0x08000a42   0x00000002   Code   RO          213    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08000a44   0x08000a44   0x0000000e   Code   RO          214    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08000000   0x08000000   0x000000ec   Data   RO           59    RESET               startup-rvds.o
+    0x080000ec   0x080000ec   0x00000000   Code   RO          150  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x080000ec   0x080000ec   0x00000004   Code   RO          177    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x080000f0   0x080000f0   0x00000004   Code   RO          180    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x080000f4   0x080000f4   0x00000000   Code   RO          182    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x080000f4   0x080000f4   0x00000000   Code   RO          184    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x080000f4   0x080000f4   0x00000008   Code   RO          185    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x080000fc   0x080000fc   0x00000004   Code   RO          192    .ARM.Collect$$$$0000000E  mc_w.l(entry12b.o)
+    0x08000100   0x08000100   0x00000000   Code   RO          187    .ARM.Collect$$$$0000000F  mc_w.l(entry10a.o)
+    0x08000100   0x08000100   0x00000000   Code   RO          189    .ARM.Collect$$$$00000011  mc_w.l(entry11a.o)
+    0x08000100   0x08000100   0x00000004   Code   RO          178    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08000104   0x08000104   0x0000004c   Code   RO           60    .text               startup-rvds.o
+    0x08000150   0x08000150   0x00000024   Code   RO          202    .text               mc_w.l(init.o)
+    0x08000174   0x08000174   0x000000e4   Code   RO          115    i.Active_IT_Debordement_Timer  DriverJeuLaser.lib(timer_1234.o)
+    0x08000258   0x08000258   0x00000074   Code   RO           74    i.CLOCK_Configure   DriverJeuLaser.lib(clock.o)
+    0x080002cc   0x080002cc   0x00000008   Code   RO           76    i.CLOCK_GetHCLK     DriverJeuLaser.lib(clock.o)
+    0x080002d4   0x080002d4   0x00000024   Code   RO           79    i.CLOCK_GetTIMCLK   DriverJeuLaser.lib(clock.o)
+    0x080002f8   0x080002f8   0x00000074   Code   RO           80    i.CLOCK_HPRECompute  DriverJeuLaser.lib(clock.o)
+    0x0800036c   0x0800036c   0x00000108   Code   RO          100    i.GPIO_Configure    DriverJeuLaser.lib(gpio.o)
+    0x08000474   0x08000474   0x000000ac   Code   RO          120    i.PWM_Init_ff       DriverJeuLaser.lib(timer_1234.o)
+    0x08000520   0x08000520   0x0000000c   Code   RO          121    i.PWM_Set_Value_TIM3_Ch3  DriverJeuLaser.lib(timer_1234.o)
+    0x0800052c   0x0800052c   0x0000010c   Code   RO          122    i.TIM1_CC_IRQHandler  DriverJeuLaser.lib(timer_1234.o)
+    0x08000638   0x08000638   0x00000018   Code   RO          123    i.TIM1_UP_IRQHandler  DriverJeuLaser.lib(timer_1234.o)
+    0x08000650   0x08000650   0x00000110   Code   RO          124    i.TIM2_IRQHandler   DriverJeuLaser.lib(timer_1234.o)
+    0x08000760   0x08000760   0x0000012c   Code   RO          125    i.TIM3_IRQHandler   DriverJeuLaser.lib(timer_1234.o)
+    0x0800088c   0x0800088c   0x0000012c   Code   RO          126    i.TIM4_IRQHandler   DriverJeuLaser.lib(timer_1234.o)
+    0x080009b8   0x080009b8   0x0000007c   Code   RO          128    i.Timer_1234_Init_ff  DriverJeuLaser.lib(timer_1234.o)
+    0x08000a34   0x08000a34   0x0000000e   Code   RO          208    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08000a42   0x08000a42   0x00000002   Code   RO          209    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08000a44   0x08000a44   0x0000000e   Code   RO          210    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x08000a52   0x08000a52   0x00000002   PAD
     0x08000a54   0x08000a54   0x00000058   Code   RO            4    i.main              principal.o
-    0x08000aac   0x08000aac   0x0000007c   Code   RO           71    moncode             gestionson.o
-    0x08000b28   0x08000b28   0x00000020   Data   RO          210    Region$$Table       anon$$obj.o
-    0x08000b48   0x08000b48   0x00002b18   Data   RO           68    SecSon              bruitverre.o
+    0x08000aac   0x08000aac   0x0000007c   Code   RO           67    moncode             gestionson.o
+    0x08000b28   0x08000b28   0x00000020   Data   RO          206    Region$$Table       anon$$obj.o
+    0x08000b48   0x08000b48   0x00002b18   Data   RO           64    SecSon              bruitverre.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08003660, Size: 0x000004a8, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08003660   0x000000a0   Data   RW          134    .data               DriverJeuLaser.lib(timer_1234.o)
-    0x200000a0   0x08003700   0x00000008   Data   RW           70    maram               gestionson.o
-    0x200000a8        -       0x00000400   Zero   RW           61    STACK               startup-rvds.o
+    0x20000000   0x08003660   0x000000a0   Data   RW          130    .data               DriverJeuLaser.lib(timer_1234.o)
+    0x200000a0   0x08003700   0x00000008   Data   RW           66    maram               gestionson.o
+    0x200000a8        -       0x00000400   Zero   RW           57    STACK               startup-rvds.o
 
 
 ==============================================================================

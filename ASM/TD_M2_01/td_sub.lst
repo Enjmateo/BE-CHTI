@@ -1,0 +1,67 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; ce programme est pour l'assembleur RealView (Keil)
+    2 00000000                 thumb
+    3 00000000                 area             moncode, code, readonly
+    4 00000000                 export           subtest
+    5 00000000         ;
+    6 00000000         subtest proc
+    7 00000000 B500            push             {lr}
+    8 00000002 F7FF FFFE       bl               subtest2
+    9 00000006 4408            add              r0, r1
+   10 00000008 BD00            pop              {pc}
+   11 0000000A                 endp
+   12 0000000A         ;
+   13 0000000A         
+   14 0000000A         ; rend le carre sur 32 bits
+   15 0000000A         subtest2
+                               proc
+   16 0000000A         ; multiplie r0*r0 (i*i) -> dans r4
+   17 0000000A FB00 F600       mul              r6, r0, r0
+   18 0000000E 4630            mov              r0, r6
+   19 00000010 4770            bx               lr
+   20 00000012                 endp
+   21 00000012                 end
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\td_sub.d -o.\td_sub.o -I.\RTE\_Target_1 -IC:\Programdata\Keil\Ar
+m\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programdata\Keil\Arm\Packs\Keil
+\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__EVAL SETA 1" --predefine="__
+MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 530" --predefine="_RTE_ SE
+TA 1" --predefine="STM32F10X_MD SETA 1" --predefine="_RTE_ SETA 1" --list=.\td_
+sub.lst td_sub.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+moncode 00000000
+
+Symbol: moncode
+   Definitions
+      At line 3 in file td_sub.s
+   Uses
+      None
+Comment: moncode unused
+subtest 00000000
+
+Symbol: subtest
+   Definitions
+      At line 6 in file td_sub.s
+   Uses
+      At line 4 in file td_sub.s
+Comment: subtest used once
+subtest2 0000000A
+
+Symbol: subtest2
+   Definitions
+      At line 15 in file td_sub.s
+   Uses
+      At line 8 in file td_sub.s
+Comment: subtest2 used once
+3 symbols
+338 symbols in table

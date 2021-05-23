@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include "DriverJeuLaser.h"
-void CallbackSon(void);
-void StartSon(void);
+#include "GestionSon.h"
+
 
 int main(void)
 {
